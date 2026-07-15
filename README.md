@@ -1,2 +1,2 @@
-# Korone-
-Extension for Roblox Revival "Korone"
+# Korone+
+Extension for Roblox Revival "Korone" to improve the user experience.
