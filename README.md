@@ -1,3 +1,4 @@
 # Korone+
 Extension for Roblox Revival "Korone" to improve the user experience.
-<img width="300" height="300" alt="3dgifmaker14720" src="https://github.com/user-attachments/assets/216a1f26-6088-42c1-8105-65428b066755" />
+<img width="628" height="120" alt="New Project" src="https://github.com/user-attachments/assets/fcfa8a3f-e3d3-44f5-9a14-e1938fcf8cfe" />
+
