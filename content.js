@@ -1,3 +1,7 @@
+fetch("https://koroneplus.neocities.org/list.txt")
+.then(r => r.text())
+.then(x => console.log("K+ LIST:", x))
+.catch(e => console.error("K+ FETCH ERROR:", e));
 (async()=>{
 
 
@@ -505,6 +509,22 @@
         #kSetup button {
         color:white !important;
         }
+
+        @keyframes kRainbowFlash {
+            0% { color:red; }
+            16% { color:orange; }
+            33% { color:yellow; }
+            50% { color:lime; }
+            66% { color:cyan; }
+            83% { color:violet; }
+            100% { color:red; }
+        }
+
+        .kRainbow,
+ .kRainbow * {
+     animation:kRainbowFlash 1s infinite !important;
+     color: inherit;
+ }
 
         `;
 
@@ -1590,7 +1610,74 @@ body::before {
 
 
 
+    async function addSpecialUserBadge() {
+        try {
+            const text = await fetch("https://koroneplus.neocities.org/list.txt")
+            .then(r => r.text());
 
+            const usernames = new Set(
+                text
+                .split(/\r?\n/)
+                .map(x => x.trim().toLowerCase())
+                .filter(Boolean)
+            );
+
+            function check() {
+                const usernameContainer = document.querySelector('[class*="usernameContainer"]');
+
+                if (!usernameContainer)
+                    return false;
+
+                const username = usernameContainer.textContent.trim().toLowerCase();
+
+                console.log("K+ checking:", username);
+
+                if (!usernames.has(username))
+                    return true;
+
+const usernameElement = document.querySelector(".username-0-2-106");
+
+                if (!usernameElement)
+                    return false;
+
+                if (usernameElement.querySelector(".kplus-special-badge"))
+                    return true;
+
+                const img = document.createElement("img");
+
+                img.src = "https://koroneplus.neocities.org/3dgifmaker14720.gif";
+                img.className = "kplus-special-badge";
+
+                img.style.width = "24px";
+                img.style.height = "24px";
+                img.style.marginLeft = "6px";
+                img.style.verticalAlign = "middle";
+
+                usernameElement.appendChild(img);
+
+                console.log("K+ badge added!");
+
+                return true;
+            }
+
+
+            if (!check()) {
+                const observer = new MutationObserver(() => {
+                    check();
+                });
+
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+
+                setTimeout(() => observer.disconnect(), 10000);
+            }
+
+        } catch (e) {
+            console.error("K+ badge error:", e);
+        }
+    }
 
 
 
@@ -2448,13 +2535,40 @@ setInterval(()=>{
         console.log("CALLING SETUP");
 
         setTimeout(()=>{
-
             firstTimeSetup();
-
         },1500);
 
     }
 
+    addSpecialUserBadge();
 
 
-})();
+    function rainbowGroup(){
+
+        if(!location.pathname.includes("/groups/8858"))
+            return;
+
+        document.querySelectorAll(".col-9.ps-0")
+        .forEach(el=>{
+            el.classList.add("kRainbow");
+
+            el.querySelectorAll("*").forEach(child=>{
+                child.classList.add("kRainbow");
+            });
+        });
+
+    }
+
+
+    rainbowGroup();
+
+
+    new MutationObserver(()=>{
+        rainbowGroup();
+    }).observe(document.body,{
+        childList:true,
+        subtree:true
+    });
+
+
+    })();

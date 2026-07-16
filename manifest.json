@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Korone+",
-  "version": "1.0",
-  "description": "Tweaks for Roblox Revival, Korone.",
+  "version": "1.1",
+  "description": "Tweaker for Roblox Revival Korone",
   "browser_specific_settings": {
     "gecko": {
       "id": "massivetoo419@gmail.com",
@@ -11,9 +11,10 @@
       }
     }
   },
-  "permissions": [
-    "storage"
-  ],
+"permissions": [
+  "storage",
+  "https://koroneplus.neocities.org/*"
+],
   "content_scripts": [
     {
       "matches": [
